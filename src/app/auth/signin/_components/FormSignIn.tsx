@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { signIn } from "@/services/auth.service";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie" 
+import Cookies from "js-cookie";
 
 const FormSignIn = () => {
   const router = useRouter();
@@ -34,10 +34,12 @@ const FormSignIn = () => {
 
     try {
       const response = await signIn(state);
-      const { accessToken, refreshToken } = response.data;
+      const { accessToken, refreshToken, user } = response.data;
 
       Cookies.set("accessToken", accessToken);
       Cookies.set("refreshToken", refreshToken);
+
+      localStorage.setItem("USER_DATA", JSON.stringify(user));
 
       Swal.fire({
         position: "center",

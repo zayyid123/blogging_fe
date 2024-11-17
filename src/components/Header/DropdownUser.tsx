@@ -4,15 +4,25 @@ import Image from "next/image";
 import ClickOutside from "@/components/ClickOutside";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { logOut } from "@/services/auth.service";
 
 const DropdownUser = () => {
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
-    router.push("/auth/signin");
+    const userData = JSON.parse(`${localStorage.getItem("USER_DATA")}`);
+
+    try {
+      if (userData.userId) {
+        await logOut(userData.userId);
+      }
+    } finally {
+      localStorage.removeItem("USER_DATA");
+      router.push("/auth/signin");
+    }
   };
 
   return (
