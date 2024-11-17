@@ -1,8 +1,11 @@
 export type BLOG = {
-  id: string;
+  id?: string;
   slug: string;
   title: string;
   content: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
+  User?: {
+    email: string;
+  };
 };

@@ -5,10 +5,10 @@ import TableBlog from "./_components/TableBlog";
 const BlogPage = () => {
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Blog" />
+      <Breadcrumb pageName="Blog" addLink="/blog/create" />
 
       <div className="flex flex-col gap-10">
-        <TableBlog/>
+        <TableBlog />
       </div>
     </DefaultLayout>
   );
